@@ -201,6 +201,7 @@ window.peGetGclid=function(){try{var r=localStorage.getItem('pe_gclid');if(!r)re
 var SCRIPT_URL="https://script.google.com/macros/s/AKfycbw6ABM1F6UmxGGRjyHDCCN5jPlWgsFHZK3IhhBk3B-ymQLQOUQV6cPeyKf6P4VI9Om9/exec",CIDADE="Caruaru",CLINICA="Caruaru Clinical Center";var FREQUENCIA="semanal",DIA_SEMANA=2,DATA_BASE="",DATA_EXTRA="2026-07-22",FIM_EXTRA="12:00:00",TURNO_EXTRA="manha",HORARIO_EXTRA="8h às 12h",TURNO="ambos",HORARIO="8h às 18h";
 function calcProximaData(){
   var agora=new Date(),hoje=new Date(agora);hoje.setHours(0,0,0,0);
+  if(FREQUENCIA==="semanal"&&agora.getDay()===DIA_SEMANA&&agora.getHours()<18)return hoje;
   var extra=DATA_EXTRA?new Date(DATA_EXTRA+"T12:00:00"):null;
   var fimExtra=DATA_EXTRA?new Date(DATA_EXTRA+"T"+FIM_EXTRA):null;
   if(extra&&fimExtra&&agora<fimExtra){TURNO=TURNO_EXTRA;HORARIO=HORARIO_EXTRA;return extra;}
@@ -258,6 +259,7 @@ function enviar(){
   function proximaData() {
     var agora = new Date();
     var hoje = new Date(agora); hoje.setHours(0,0,0,0);
+    if (FREQ === 'semanal' && agora.getDay() === DIA_SEMANA && agora.getHours() < 18) return hoje;
     var extra = DATA_EXTRA ? new Date(DATA_EXTRA + 'T12:00:00') : null;
     var fimExtra = DATA_EXTRA ? new Date(DATA_EXTRA + 'T' + FIM_EXTRA) : null;
     if (extra && fimExtra && agora < fimExtra) { ehExtra = true; return extra; }
